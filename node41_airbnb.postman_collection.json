@@ -1,0 +1,577 @@
+{
+	"info": {
+		"_postman_id": "29b121d4-b8c5-4ef9-b39d-328019db6e7d",
+		"name": "node41_airbnb",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33947110"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/auth/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"thanhf@gmail.com\", \"password\": \"Aa@12345\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/auth/sign-up",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "your-token-value",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"name\": \"thanh\",\r\n\"email\": \"user1@gmail.com\", \"password\": \"Aa@1234\", \"phone\":\"0365465752\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/auth/sign-up",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"sign-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/nguoi-dung",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoidXNlcjFAZ21haWwuY29tIiwiaWF0IjoxNzIwODEwODM0LCJleHAiOjE3Mjg1ODY4MzR9.jregW5dynQ31bU8mopWsO0kK9HTpV6Glftd7cF9-M8w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"name\": \"thanhfr\",\r\n\"email\": \"thanhfr@gmail.com\", \"password\": \"Aa@1234\", \"phone\":\"0365465752\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/nguoi-dung",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"nguoi-dung"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/nguoi-dung",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoidXNlcjFAZ21haWwuY29tIiwiaWF0IjoxNzIwODEwODM0LCJleHAiOjE3Mjg1ODY4MzR9.jregW5dynQ31bU8mopWsO0kK9HTpV6Glftd7cF9-M8w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/nguoi-dung",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"nguoi-dung"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/nguoi-dung/3",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoidXNlcjFAZ21haWwuY29tIiwiaWF0IjoxNzIwODEwODM0LCJleHAiOjE3Mjg1ODY4MzR9.jregW5dynQ31bU8mopWsO0kK9HTpV6Glftd7cF9-M8w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/nguoi-dung/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"nguoi-dung",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/nguoi-dung/3",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoidXNlcjFAZ21haWwuY29tIiwiaWF0IjoxNzIwODEwODM0LCJleHAiOjE3Mjg1ODY4MzR9.jregW5dynQ31bU8mopWsO0kK9HTpV6Glftd7cF9-M8w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 3,\r\n    \"name\": \"thanh\",\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"Aa@1234\",\r\n    \"phone\": \"0365465752\",\r\n    \"birthday\": null,\r\n    \"avatar\": null,\r\n    \"gender\": null,\r\n    \"role\": \"ADMIN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/nguoi-dung/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"nguoi-dung",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/nguoi-dung/4",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoidGhhbmhAZ21haWwuY29tIiwiaWF0IjoxNzIwODExMzY1LCJleHAiOjE3Mjg1ODczNjV9.PVhazeNRDe4mReJAeJ51Uu7jtQh1klKVe8lFfEUxKQM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/nguoi-dung/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"nguoi-dung",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/nguoi-dung/upload-avatar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/nguoi-dung/upload-avatar",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"nguoi-dung",
+						"upload-avatar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/binh-luan",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoidGhhbmhAZ21haWwuY29tIiwiaWF0IjoxNzIwODExMzY1LCJleHAiOjE3Mjg1ODczNjV9.PVhazeNRDe4mReJAeJ51Uu7jtQh1klKVe8lFfEUxKQM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/binh-luan",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"binh-luan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/phong",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoidXNlcjFAZ21haWwuY29tIiwiaWF0IjoxNzIwODAyOTgyLCJleHAiOjE3Mjg1Nzg5ODJ9.U0qjC46siFGFGS8CgOQOpw8ddD1ZHIGvqZqEMPRAdP8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/phong/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"phong",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/phong",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"id\": 8,\r\n    \"tenPhong\": \"phòng 8\",\r\n    \"khach\": 4,\r\n    \"phongNgu\": 2,\r\n    \"giuong\": 4,\r\n    \"phongTam\": 1,\r\n    \"moTa\": \"rất ok\",\r\n    \"giaTien\": 10,\r\n    \"mayGiat\": false,\r\n    \"banLa\": false,\r\n    \"tivi\": true,\r\n    \"dieuHoa\": true,\r\n    \"wifi\": true,\r\n    \"bep\": false,\r\n    \"doXe\": true,\r\n    \"hoBoi\": false,\r\n    \"banUi\": false,\r\n    \"hinhAnh\": \"hinhAnh8\",\r\n    \"maViTri\": 2\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/phong",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"phong"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/phong/1",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 7,\r\n    \"tenPhong\": \"phòng 7\",\r\n    \"khach\": 4,\r\n    \"phongNgu\": 2,\r\n    \"giuong\": 4,\r\n    \"phongTam\": 1,\r\n    \"moTa\": \"rất ok\",\r\n    \"giaTien\": 10,\r\n    \"mayGiat\": false,\r\n    \"banLa\": false,\r\n    \"tivi\": true,\r\n    \"dieuHoa\": true,\r\n    \"wifi\": true,\r\n    \"bep\": false,\r\n    \"doXe\": true,\r\n    \"hoBoi\": false,\r\n    \"banUi\": false,\r\n    \"hinhAnh\": \"hinhAnh7\",\r\n    \"maViTri\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/phong/7",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"phong",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/phong/8",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/phong/8",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"phong",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/dat-phong",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"id\": 3,\r\n        \"maPhong\": 1,\r\n        \"ngayDen\": \"2023-07-01T14:00:00.000Z\",\r\n        \"ngayDi\": \"2023-07-05T12:00:00.000Z\",\r\n        \"soLuongKhach\": 2,\r\n        \"maNguoiDung\": 2\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/dat-phong",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dat-phong"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/dat-phong",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/dat-phong",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dat-phong"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/dat-phong/1",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 3,\r\n    \"maPhong\": 2,\r\n    \"ngayDen\": \"2023-07-01T14:00:00.000Z\",\r\n    \"ngayDi\": \"2023-07-05T12:00:00.000Z\",\r\n    \"soLuongKhach\": 1,\r\n    \"maNguoiDung\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/dat-phong/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dat-phong",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/dat-phong/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/dat-phong/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dat-phong",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/dat-phong/3",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/dat-phong/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dat-phong",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/vi-tri",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"id\": 3,\r\n        \"tenViTri\": \"Nha Trang\",\r\n        \"tinhThanh\": \"Khánh Hòa\",\r\n        \"quocGia\": \"Việt Nam\",\r\n        \"hinhAnh\": \"HinhAnh3\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/vi-tri",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vi-tri"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/vi-tri/3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/vi-tri/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vi-tri",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/vi-tri",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/vi-tri",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vi-tri"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/vi-tri/3",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"id\": 3,\r\n        \"tenViTri\": \"Nha Trang\",\r\n        \"tinhThanh\": \"Khánh Hòa\",\r\n        \"quocGia\": \"Việt Nam\",\r\n        \"hinhAnh\": \"HinhAnh3\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/vi-tri/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vi-tri",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/vi-tri/3",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/vi-tri/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vi-tri",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
