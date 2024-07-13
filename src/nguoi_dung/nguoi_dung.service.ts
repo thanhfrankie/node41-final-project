@@ -90,8 +90,26 @@ export class NguoiDungService {
     });
     return 'User deleted successfully';
   }
-  async uploadAvatar() {
-    
+  async uploadAvatar(file: Express.Multer.File, userId: number): Promise<string> {
+  
+    if (!file) {
+      throw new BadRequestException('File not provided');
+    }
+    let existingUser = await this.prisma.nguoi_dung.findUnique({
+      where: { id: userId },
+    });
+    if (!existingUser) {
+      throw new NotFoundException('User not found');
+    }
+
+    const updatedUser = await this.prisma.nguoi_dung.update({
+      where: { id: userId },
+      data: {
+        avatar: `/public/img/${file.filename}`,
+      },
+    });
+
+    return 'Avatar uploaded successfully';
   }
   private validatePassword(password: string): void {
     if (password.length < 6) {

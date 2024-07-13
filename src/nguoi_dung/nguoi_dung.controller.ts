@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { NguoiDungService } from './nguoi_dung.service';
 import { CreateNguoiDungDto } from './dto/create-nguoi_dung.dto';
-import { FileUploadDto, UpdateNguoiDungDto } from './dto/update-nguoi_dung.dto';
+import {  FileUploadDto, UpdateNguoiDungDto } from './dto/update-nguoi_dung.dto';
 import { NguoiDungType } from './entities/nguoi_dung.entity';
 import { nguoi_dung } from '@prisma/client';
 import { diskStorage } from 'multer';
@@ -50,8 +50,8 @@ class update_nguoi_dungType {
 }
 
 
-@ApiBearerAuth()
-@UseGuards(AuthGuard("check-jwt"))
+// @ApiBearerAuth()
+// @UseGuards(AuthGuard("check-jwt"))
 @ApiTags('NguoiDung')
 @Controller('nguoi-dung')
 export class NguoiDungController {
@@ -74,7 +74,7 @@ export class NguoiDungController {
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() body:update_nguoi_dungType,
   ) {
     return this.nguoiDungService.update(+id,body );
@@ -99,7 +99,11 @@ export class NguoiDungController {
     }),
   )
   @Post('/upload-avatar')
-  uploadAvatar(@UploadedFile() file: Express.Multer.File) {
-    return file;
+  async uploadAvatar(
+    @UploadedFile() file: Express.Multer.File,
+    @Param('id') id: number,
+    @Body() body: { id: number },
+  ) {
+    return this.nguoiDungService.uploadAvatar(file, body.id);
   }
 }
