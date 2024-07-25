@@ -1,4 +1,9 @@
-import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateNguoiDungDto } from './dto/create-nguoi_dung.dto';
 import { UpdateNguoiDungDto } from './dto/update-nguoi_dung.dto';
 import { nguoi_dung, PrismaClient } from '@prisma/client';
@@ -7,12 +12,9 @@ import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcrypt';
 @Injectable()
 export class NguoiDungService {
-  constructor(private configService: ConfigService) {
-    
-  }
+  constructor(private configService: ConfigService) {}
   prisma = new PrismaClient();
   async create(model: any): Promise<nguoi_dung> {
-   
     const { email, name, phone, password } = model;
     if (!email || !name || !phone || !password) {
       throw new BadRequestException('Missing required fields');
@@ -20,19 +22,18 @@ export class NguoiDungService {
     this.validatePassword(password);
 
     const existingEmail = await this.prisma.nguoi_dung.findFirst({
-      where: {email}
-    })
+      where: { email },
+    });
     if (existingEmail) {
       throw new ConflictException('Email already exists');
-      
     }
-    const existingPhone =await this.prisma.nguoi_dung.findFirst({
-      where: {phone}
-    })
+    const existingPhone = await this.prisma.nguoi_dung.findFirst({
+      where: { phone },
+    });
     if (existingPhone) {
       throw new ConflictException('Phone number already exists');
     }
-    
+
     const hashedPassword = await bcrypt.hash(password, 15);
     const newUser = await this.prisma.nguoi_dung.create({
       data: {
@@ -50,48 +51,47 @@ export class NguoiDungService {
     return data;
   }
 
- async findOne(id: number):Promise<nguoi_dung> {
-   let data= await this.prisma.nguoi_dung.findUnique({
-      where:{id}
-   });
-   if (!data) {
-    throw new NotFoundException('User not found');
-  }
+  async findOne(id: number): Promise<nguoi_dung> {
+    let data = await this.prisma.nguoi_dung.findUnique({
+      where: { id },
+    });
+    if (!data) {
+      throw new NotFoundException('User not found');
+    }
     return data;
   }
 
-  async update(id: number,model:any ):Promise<nguoi_dung>  {
-    let existingUser= await this.prisma.nguoi_dung.findUnique({
-      where:{id}
-   });
-   if (!existingUser) {
-    throw new NotFoundException('User not found');
-  }
-  if (model.password) {
-    this.validatePassword(model.password);
-    model.password = await bcrypt.hash(model.password, 15);
-  }
-  const updateUser = await this.prisma.nguoi_dung.update({
-    where: { id },
-    data: model,
-  });
-  return updateUser;
+  async update(id: number, model: any): Promise<nguoi_dung> {
+    let existingUser = await this.prisma.nguoi_dung.findUnique({
+      where: { id },
+    });
+    if (!existingUser) {
+      throw new NotFoundException('User not found');
+    }
+    if (model.password) {
+      this.validatePassword(model.password);
+      model.password = await bcrypt.hash(model.password, 15);
+    }
+    const updateUser = await this.prisma.nguoi_dung.update({
+      where: { id },
+      data: model,
+    });
+    return updateUser;
   }
 
   async remove(id: number) {
-    let existingUser= await this.prisma.nguoi_dung.findUnique({
-      where:{id}
-   });
-   if (!existingUser) {
-    throw new NotFoundException('User not found');
+    let existingUser = await this.prisma.nguoi_dung.findUnique({
+      where: { id },
+    });
+    if (!existingUser) {
+      throw new NotFoundException('User not found');
     }
     await this.prisma.nguoi_dung.delete({
       where: { id },
     });
     return 'User deleted successfully';
   }
-  async uploadAvatar(file: Express.Multer.File, userId: number): Promise<string> {
-  
+  async uploadAvatar(file: Express.Multer.File, userId: number): Promise<any> {
     if (!file) {
       throw new BadRequestException('File not provided');
     }
@@ -102,15 +102,19 @@ export class NguoiDungService {
       throw new NotFoundException('User not found');
     }
 
-    const updatedUser = await this.prisma.nguoi_dung.update({
+    const fileUploadPromises = await this.prisma.nguoi_dung.update({
       where: { id: userId },
       data: {
         avatar: `/public/img/${file.filename}`,
       },
     });
 
-    return 'Avatar uploaded successfully';
+    return {
+      message: 'Avatar uploaded successfully',
+      file: fileUploadPromises,
+    };
   }
+
   private validatePassword(password: string): void {
     if (password.length < 6) {
       throw new BadRequestException(

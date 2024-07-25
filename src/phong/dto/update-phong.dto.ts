@@ -3,11 +3,11 @@ import { CreatePhongDto } from './create-phong.dto';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdatePhongDto extends PartialType(CreatePhongDto) { }
-export class FileUploadDto {
+export class RoomUploadDto {
     @ApiProperty({ type: 'string', format: 'binary' })
-    phong: any;
+    image: any;
 }
-export class FilesUploadDto {
+export class RoomsUploadDto {
     @ApiProperty({ type: 'array', items: { type: 'string', format: 'binary' } })
-    files: any[];
+    images: any[];
   }

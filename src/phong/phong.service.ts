@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreatePhongDto } from './dto/create-phong.dto';
 import { UpdatePhongDto } from './dto/update-phong.dto';
 import { ConfigService } from '@nestjs/config';
@@ -86,15 +90,64 @@ export class PhongService {
   }
 
   async remove(id: number) {
-    let existingRoom= await this.prisma.phong.findUnique({
-      where:{id}
-   });
-   if (!existingRoom) {
-    throw new NotFoundException('Room not found');
+    let existingRoom = await this.prisma.phong.findUnique({
+      where: { id },
+    });
+    if (!existingRoom) {
+      throw new NotFoundException('Room not found');
     }
     await this.prisma.phong.delete({
       where: { id },
     });
     return 'Room deleted successfully';
+  }
+  async uploadRoomImage(
+    file: Express.Multer.File,
+    roomId: number,
+  ): Promise<any> {
+    if (!file) {
+      throw new BadRequestException('File not provided');
+    }
+    let existingroom = await this.prisma.phong.findUnique({
+      where: { id: roomId },
+    });
+    if (!existingroom) {
+      throw new NotFoundException('room not found');
+    }
+
+   const uploadResult = await this.prisma.phong.update({
+      where: { id: roomId },
+      data: {
+        hinhAnh: `/public/img/${file.filename}`,
+      },
+    });
+
+    return {message: 'Images uploaded successfully', file:uploadResult};
+  }
+  async uploadRoomImages(
+    files: Express.Multer.File[],
+    roomId: number,
+  ): Promise<any> {
+    if (!files || files.length === 0) {
+      throw new BadRequestException('No files provided');
+    }
+    let existingRoom = await this.prisma.phong.findUnique({
+      where: { id: roomId },
+    });
+    if (!existingRoom) {
+      throw new NotFoundException('room not found');
+    }
+    const fileUploadPromises = files.map((file) => {
+      return this.prisma.phong.update({
+        where: { id: roomId },
+        data: {
+          hinhAnh: `/public/img/${file.filename}`,
+        },
+      });
+    });
+
+    const uploadResults = await Promise.all(fileUploadPromises);
+
+    return { message: 'Images uploaded successfully', files: uploadResults };
   }
 }

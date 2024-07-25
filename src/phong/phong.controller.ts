@@ -10,10 +10,11 @@ import {
   UseInterceptors,
   UploadedFiles,
   UploadedFile,
+  BadRequestException,
 } from '@nestjs/common';
 import { PhongService } from './phong.service';
 import { CreatePhongDto } from './dto/create-phong.dto';
-import { FilesUploadDto, FileUploadDto, UpdatePhongDto } from './dto/update-phong.dto';
+import { RoomsUploadDto, RoomUploadDto, UpdatePhongDto } from './dto/update-phong.dto';
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
@@ -60,8 +61,8 @@ class updateRoomType {
   maViTri: number;
 }
 
-@ApiBearerAuth()
-@UseGuards(AuthGuard('check-jwt'))
+// @ApiBearerAuth()
+// @UseGuards(AuthGuard('check-jwt'))
 @ApiTags('Phong')
 @Controller('phong')
 export class PhongController {
@@ -93,35 +94,44 @@ export class PhongController {
   }
   @ApiConsumes("multipart/form-data")
   @ApiBody({
-    type: FileUploadDto
+    type: RoomUploadDto
   })
-  @UseInterceptors(FileInterceptor("phong", {
+  @UseInterceptors(FileInterceptor("image", {
     storage: diskStorage({
       destination: process.cwd() + "/public/img",
       filename: (req, file, callback) => callback(null, new Date().getTime() + "_" + file.originalname)
     })
   }))
-  @Post("/upload-image")
-  uploadVideo(@UploadedFile() file: Express.Multer.File) {
-    return file
+  @Post("/upload-image/:id")
+  uploadRoomImage(@UploadedFile() file: Express.Multer.File,@Param('id') id: string,) {
+    const roomId = parseInt(id, 10);
+    if (isNaN(roomId)) {
+      throw new BadRequestException('Invalid room ID');
+    }
+    return this.phongService.uploadRoomImage(file, roomId);
   }
 
 
 
   @ApiConsumes("multipart/form-data")
   @ApiBody({
-    type: FilesUploadDto
+    type: RoomsUploadDto
   })
   // upload nhiều file
-  @UseInterceptors(FilesInterceptor("phong", 5, {
+  @UseInterceptors(FilesInterceptor("images", 5, {
     storage: diskStorage({
       destination: process.cwd() + "/public/img",
       filename: (req, file, callback) => callback(null, new Date().getTime() + "_" + file.originalname)
     })
   }))
 
-  @Post("/upload-multi-image")
-  uploadListImage(@UploadedFiles() files: Express.Multer.File[]) {
-    return files;
+  @Post("/upload-multi-image/:id")
+  uploadRoomImages(@UploadedFiles() files: Express.Multer.File[],@Param('id') id: string,) {
+    const roomId = parseInt(id, 10);
+    console.log('Service - files ID:', files);
+    if (isNaN(roomId)) {
+      throw new BadRequestException('Invalid room ID');
+    }
+    return this.phongService.uploadRoomImages(files, roomId);
   }
 }

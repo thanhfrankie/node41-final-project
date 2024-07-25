@@ -3,7 +3,7 @@ import { CreateNguoiDungDto } from './create-nguoi_dung.dto';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateNguoiDungDto extends PartialType(CreateNguoiDungDto) {}
-export class FileUploadDto {
-    @ApiProperty({ type: 'string', format: 'binary' })
-    nguoi_dung: any;
+export class UploadAvatarDto {
+  @ApiProperty({ type: 'string', format: 'binary' })
+  image: any;
 }
